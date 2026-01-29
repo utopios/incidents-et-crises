@@ -1,0 +1,4 @@
+This is a fake binary for demo purposes
+sekurlsa::logonpasswords
+Some random data
+gentilkiwi was here
