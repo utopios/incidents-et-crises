@@ -1,0 +1,120 @@
+======================================================================
+ALERT TRIAGER - Démonstration
+======================================================================
+
+Alerte: ALERT-2024-00142
+Titre: Volume anormal de modifications de fichiers détecté
+Source: SIEM - Splunk
+Règle: CORR-006
+
+======================================================================
+RÉSULTAT DU TRIAGE
+======================================================================
+
+Statut:                   triaged
+Sévérité:                 CRITICAL
+Faux positif:             Non
+Escalade:                 Oui
+
+IOCs extraits:
+  - [ip] 185.234.72.100
+  - [domain] svchost32.exe
+  - [domain] powershell.exe
+
+Enrichissements:
+  - 185.234.72.100: MALVEILLANT (MockThreatIntel, high)
+  - svchost32.exe: OK (MockThreatIntel, medium)
+  - powershell.exe: OK (MockThreatIntel, medium)
+
+Escalader vers:
+  - SOC Manager
+  - RSSI
+  - On-Call IR
+
+Action recommandée:
+  ESCALADE IMMÉDIATE - Contacter le SOC Manager et isoler les systèmes affectés
+
+Techniques MITRE ATT&CK:
+  - T1486
+
+Notes d'analyse:
+Alerte source: SIEM - Splunk
+Règle: CORR-006
+IOCs extraits: 3
+IOCs malveillants détectés: 1
+  - 185.234.72.100 (MockThreatIntel: high)
+
+======================================================================
+EXPORT JSON
+======================================================================
+{
+  "alert_id": "ALERT-2024-00142",
+  "status": "triaged",
+  "severity": "CRITICAL",
+  "timestamp": "2026-01-29T14:47:31.061835",
+  "extracted_iocs": [
+    {
+      "type": "ip",
+      "value": "185.234.72.100",
+      "context": "...powershell -enc JABjAGw...\"\n    NetworkConnection=185.234.72.100:443\n     192.168.5.10 185.234.72.100"
+    },
+    {
+      "type": "domain",
+      "value": "svchost32.exe",
+      "context": "...s en 5 minutes sur SRV-FILE-01. Processus suspect svchost32.exe avec connexion r\u00e9seau externe. Possible activit\u00e9 ..."
+    },
+    {
+      "type": "domain",
+      "value": "powershell.exe",
+      "context": "...h=C:\\Windows\\Temp\\svchost32.exe\n    ParentProcess=powershell.exe CommandLine=\"powershell -enc JABjAGw...\"\n    Netw..."
+    }
+  ],
+  "enrichments": [
+    {
+      "ioc": "185.234.72.100",
+      "type": "ip",
+      "source": "MockThreatIntel",
+      "is_malicious": true,
+      "confidence": "high",
+      "details": {
+        "reason": "Known C2 server"
+      },
+      "error": null
+    },
+    {
+      "ioc": "svchost32.exe",
+      "type": "domain",
+      "source": "MockThreatIntel",
+      "is_malicious": false,
+      "confidence": "medium",
+      "details": {
+        "status": "not_found_in_database"
+      },
+      "error": null
+    },
+    {
+      "ioc": "powershell.exe",
+      "type": "domain",
+      "source": "MockThreatIntel",
+      "is_malicious": false,
+      "confidence": "medium",
+      "details": {
+        "status": "not_found_in_database"
+      },
+      "error": null
+    }
+  ],
+  "is_false_positive": false,
+  "false_positive_reason": null,
+  "recommended_action": "ESCALADE IMM\u00c9DIATE - Contacter le SOC Manager et isoler les syst\u00e8mes affect\u00e9s",
+  "analyst_notes": "Alerte source: SIEM - Splunk\nR\u00e8gle: CORR-006\nIOCs extraits: 3\nIOCs malveillants d\u00e9tect\u00e9s: 1\n  - 185.234.72.100 (MockThreatIntel: high)",
+  "escalate": true,
+  "escalate_to": [
+    "SOC Manager",
+    "RSSI",
+    "On-Call IR"
+  ],
+  "mitre_techniques": [
+    "T1486"
+  ]
+}
